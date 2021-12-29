@@ -9,15 +9,15 @@ defmodule Cognac do
 
   ```elixir
   iex> query = [hero: [:name, friends: [:name]]]
-  iex> Cognac.query(query)
-  "query{hero{name friends{name}}}"
+  iex> Cognac.query(query) |> IO.puts
+  query{hero{name friends{name}}}
   ```
 
   ## Options
 
   * `:output`
-    * `:string` (default) - Outputs query as string
-    * `:iodata` - Outputs as query data
+    * `:iodata` (default) - Outputs as IO data
+    * `:binary` - Outputs query as a binary string
   * `pretty`
     * `false` (default) - Outputs minimal query
     * `true` - Outputs prettified query with indentation and linebreaks
@@ -33,15 +33,15 @@ defmodule Cognac do
 
   ```elixir
   iex> mutation = [hero: [:name, friends: [:name]]]
-  iex> Cognac.mutation(mutation)
-  "mutation{updateHero(name:\"Steve\"){name}}"
+  iex> Cognac.mutation(mutation) |> IO.puts
+  mutation{updateHero(name:\"Steve\"){name}}
   ```
 
   ## Options
 
   * `:output`
-    * `:string` (default) - Outputs query as string
-    * `:iodata` - Outputs as query data
+    * `:iodata` (default) - Outputs as IO data
+    * `:binary` - Outputs query as a binary string
   * `pretty`
     * `false` (default) - Outputs minimal query
     * `true` - Outputs prettified query with indentation and linebreaks
@@ -57,15 +57,15 @@ defmodule Cognac do
 
   ```elixir
   iex> subscription = [heroUpdated: [:name]]
-  iex> Cognac.subscription(subscription)
-  "subscription{heroUpdated{name}}"
+  iex> Cognac.subscription(subscription) |> IO.puts
+  subscription{heroUpdated{name}}
   ```
 
   ## Options
 
   * `:output`
-    * `:string` (default) - Outputs query as string
-    * `:iodata` - Outputs as query data
+    * `:iodata` (default) - Outputs as IO data
+    * `:binary` - Outputs query as a binary string
   * `pretty`
     * `false` (default) - Outputs minimal query
     * `true` - Outputs prettified query with indentation and linebreaks
@@ -81,7 +81,7 @@ defmodule Cognac do
     case options[:output] do
       :iodata -> iodata
       :binary -> IO.iodata_to_binary(iodata)
-      _ -> IO.iodata_to_binary(iodata)
+      _ -> iodata
     end
   end
 end
