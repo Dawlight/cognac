@@ -17,14 +17,14 @@ defmodule Cognac.QueryArgument do
 
   defp build_arguments([{key, value}], pretty?, buffer) do
     kvs = @key_value_separator[pretty?]
-    [Value.build(value, pretty?), kvs, Atom.to_string(key) | buffer] |> Enum.reverse()
+    [Value.build(value, pretty?), kvs, to_string(key) | buffer] |> Enum.reverse()
   end
 
   defp build_arguments([{key, value} | rest], pretty?, buffer) do
     as = @argument_separator[pretty?]
     kvs = @key_value_separator[pretty?]
 
-    buffer = [as, Value.build(value, pretty?), kvs, Atom.to_string(key) | buffer]
+    buffer = [as, Value.build(value, pretty?), kvs, to_string(key) | buffer]
     build_arguments(rest, pretty?, buffer)
   end
 end
