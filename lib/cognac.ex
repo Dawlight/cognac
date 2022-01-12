@@ -99,6 +99,20 @@ defmodule Cognac do
     ["subscription ", name, arguments, Query.build(query, options)]
   end
 
+  @doc """
+  Marks value as variable, helping with correct annotation using ($) and all that jazz.
+  """
+  defmacro variable(name) when is_binary(name) do
+    quote do: {:variable, unquote(name)}
+  end
+
+  @doc """
+  Marks type as non-null, appending with an exclamation mark (!).
+  """
+  defmacro non_null(type) do
+    quote do: [to_string(unquote(type)), ?!]
+  end
+
   defp binary_or_iodata(iodata, options) do
     case options[:output] do
       :iodata -> iodata

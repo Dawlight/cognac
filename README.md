@@ -8,7 +8,7 @@ Add Cognac as a dependency in your `mix.exs` file:
 
 ```elixir
 def deps do
-  [{:cognac, "~> 0.3.0"}]
+  [{:cognac, "~> 0.4.0"}]
 end
 ```
 
