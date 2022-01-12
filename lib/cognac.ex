@@ -3,6 +3,7 @@ defmodule Cognac do
 
   """
   alias Cognac.Query
+  alias Cognac.OperationArgument
 
   @doc """
   Convert keyword list/tuple list to GraphQL query string
@@ -75,6 +76,27 @@ defmodule Cognac do
   def subscription(query, options \\ []) do
     ["subscription", Query.build(query, options)]
     |> binary_or_iodata(options)
+  end
+
+  @spec query_operation(binary(), list() | keyword(), list() | keyword(), keyword()) ::
+          binary() | iodata()
+  def query_operation(name, arguments, query, options \\ []) do
+    arguments = OperationArgument.build(arguments)
+    ["query ", name, arguments, " ", Query.build(query, options)]
+  end
+
+  @spec mutation_operation(binary(), list() | keyword(), list() | keyword(), keyword()) ::
+          binary() | iodata()
+  def mutation_operation(name, arguments, query, options \\ []) do
+    arguments = OperationArgument.build(arguments)
+    ["mutation ", name, arguments, Query.build(query, options)]
+  end
+
+  @spec subscription_operation(binary(), list() | keyword(), list() | keyword(), keyword()) ::
+          binary() | iodata()
+  def subscription_operation(name, arguments, query, options \\ []) do
+    arguments = OperationArgument.build(arguments)
+    ["subscription ", name, arguments, Query.build(query, options)]
   end
 
   defp binary_or_iodata(iodata, options) do
