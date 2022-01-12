@@ -106,6 +106,10 @@ defmodule Cognac do
     quote do: {:variable, unquote(name)}
   end
 
+  defmacro variable(name) when is_atom(name) do
+    quote do: {:variable, unquote(name)}
+  end
+
   @doc """
   Marks type as non-null, appending with an exclamation mark (!).
   """
