@@ -9,7 +9,15 @@ defmodule Cognac.Value do
   defp build_value(nil, _), do: "null"
   defp build_value(value, _pretty?) when value == %{}, do: "{}"
   defp build_value({:variable, name}, _), do: ["$", to_string(name)]
-  defp build_value(value, _) when is_binary(value), do: [?", value, ?"]
+
+  defp build_value(value, _) when is_binary(value) do
+    value =
+      value
+      |> String.replace("\\", "\\\\")
+      |> String.replace("\"", "\\\"")
+
+    [?", value, ?"]
+  end
 
   defp build_value(value, pretty?) when is_struct(value) do
     build_value(Map.from_struct(value), pretty?)

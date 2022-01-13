@@ -1,7 +1,7 @@
 defmodule Cognac.MixProject do
   use Mix.Project
 
-  @version "0.4.1"
+  @version "0.5.0"
   @source_url "https://github.com/Dawlight/cognac"
 
   def project do
@@ -27,9 +27,7 @@ defmodule Cognac.MixProject do
   end
 
   defp deps do
-    [
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
-    ]
+    [{:jason, "~> 1.3"}, {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}]
   end
 
   defp package() do
