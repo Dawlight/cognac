@@ -27,7 +27,7 @@ defmodule Cognac.MixProject do
   end
 
   defp deps do
-    [{:jason, "~> 1.3"}, {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}]
+    [{:ex_doc, ">= 0.0.0", only: :dev, runtime: false}]
   end
 
   defp package() do
