@@ -1,8 +1,10 @@
 defmodule CognacTest do
   use ExUnit.Case
-  doctest Cognac
 
-  test "greets the world" do
-    assert Cognac.hello() == :world
+  test "test" do
+    fields = [:fooo, bar: [:baz]]
+    arguments = %{"foo" => "bar"}
+
+    Cognac.query([stuff: {arguments, fields}], output: :binary, pretty: true)
   end
 end

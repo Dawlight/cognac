@@ -11,7 +11,7 @@ defmodule Cognac do
   ```elixir
   iex> query = [hero: [:name, friends: [:name]]]
   iex> Cognac.query(query) |> IO.puts
-  query{hero{name friends{name}}}
+  # query{hero{name friends{name}}}
   ```
 
   ## Options

@@ -46,13 +46,13 @@ defmodule Cognac.Value do
 
   defp build_object([{key, value}], pretty?, buffer) do
     separator = @key_value_separator[pretty?]
-    [build_value(value, pretty?), separator, Atom.to_string(key) | buffer] |> Enum.reverse()
+    [build_value(value, pretty?), separator, to_string(key) | buffer] |> Enum.reverse()
   end
 
   defp build_object([{key, value} | rest], pretty?, buffer) do
     kvs = @key_value_separator[pretty?]
     as = @argument_separator[pretty?]
-    buffer = [as, build_value(value, pretty?), kvs, Atom.to_string(key) | buffer]
+    buffer = [as, build_value(value, pretty?), kvs, to_string(key) | buffer]
     build_object(rest, pretty?, buffer)
   end
 
